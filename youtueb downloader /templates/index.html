@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 YouTube video/audio Downloader</h1>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="flashes">
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+          <input type="text" name="url" id="urlInput" placeholder="Enter YouTube URL" required oninput="showPreview()" />
+
+<div id="previewContainer" class="video-preview" style="display: none;">
+  <img id="videoPreview" src="" alt="Video Preview" class="preview-image" />
+  <a id="youtubeLink" href="#" target="_blank" class="youtube-button" aria-label="Watch on YouTube">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png"
+         alt="YouTube Logo" class="youtube-logo" />
+  </a>
+</div>
+
+<div id="loading" style="display:none;">
+    <p>⏳ Downloading... Please wait.</p>
+</div>
+         <label for="mode">Choose download type:</label>
+            <select name="mode" id="mode" onchange="toggleResolution(this.value)">
+                <option value="audio">Audio (MP3)</option>
+                <option value="video">Video (MP4 by Resolution)</option>
+            </select>
+
+            <div id="resolutionDiv" style="display: none;">
+                <label for="resolution">Select resolution:</label>
+                <select name="resolution" id="resolution">
+                    <option value="360">360p</option>
+                    <option value="480">480p</option>
+                    <option value="720">720p</option>
+                    <option value="1080">1080p (Full HD)</option>
+                    <option value="1440">1440p (2K)</option>
+                    <option value="2160">2160p (4K)</option>
+                </select>
+            </div>
+
+            <button type="submit">Download</button>
+        </form>
+        {% if download_filename %}
+         <div class="download-link">
+               ✅ Your file is ready:
+               <a href="{{ url_for('download_file', mode=mode, filename=download_filename) }}" download>
+               Click here to download
+                                     </a>
+          </div>
+         {% endif %}
+    </div>
+
+    <script>
+        function toggleResolution(value) {
+            const resDiv = document.getElementById('resolutionDiv');
+            resDiv.style.display = (value === 'video') ? 'block' : 'none';
+        }
+
+         function showPreview() {
+    const input = document.getElementById('urlInput').value;
+    const videoId = extractVideoId(input);
+
+    if (videoId) {
+        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+        const preview = document.getElementById('videoPreview');
+        const link = document.getElementById('youtubeLink');
+
+        preview.src = thumbnailUrl;
+        link.href = `https://www.youtube.com/watch?v=${videoId}`;
+
+        document.getElementById('previewContainer').style.display = 'block';
+    } else {
+        document.getElementById('previewContainer').style.display = 'none';
+    }
+}
+
+function extractVideoId(url) {
+    const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&#\n?]+)/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+}
+ document.querySelector("form").addEventListener("submit", () => {
+        document.getElementById("loading").style.display = "block";
+    });
+
+    </script>
+</body>
+</html>

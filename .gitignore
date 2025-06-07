@@ -1,0 +1,19 @@
+# Ignore Python virtual environment folder
+venv/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+
+# Ignore downloaded videos folder
+downloads/
+
+# Ignore environment variable files (if you have any)
+.env
+
+# macOS system files
+.DS_Store
+
+# Ignore IDE/editor config files (optional)
+.vscode/
+.idea/

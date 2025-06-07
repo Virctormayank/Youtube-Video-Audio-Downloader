@@ -1,0 +1,103 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #baedfe;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: #d1f3ff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+button {
+    background-color: #00bcff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.flashes {
+    list-style: none;
+    padding: 0;
+    color: green;
+}
+ 
+
+.video-preview {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin-top: 15px;
+}
+
+.preview-image {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  aspect-ratio: 16/9;
+  display: block;
+}
+
+.youtube-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.youtube-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  filter: none; /* Remove invert so it keeps original colors */
+}
+
+.youtube-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.youtube-button:hover .youtube-logo {
+  transform: scale(1.2);
+}
+.download-link {
+    margin-top: 20px;
+    font-weight: bold;
+    color: green;
+}
+#loading {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #444;
+}
